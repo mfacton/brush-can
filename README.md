@@ -1,1 +1,2 @@
-## CAN connected 3 brushed motor controllers
+# brush-can
+Dense quad brushed motor controller with CAN
