@@ -239,7 +239,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "brush3-can.kicad_pro",
+    "filename": "brush-can.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -515,6 +515,14 @@
     [
       "4bb7e6c7-efcd-4935-bea1-9ed17b5496e4",
       "Driver1"
+    ],
+    [
+      "89c2d3f4-9357-4ee4-b86a-530effa27cc5",
+      "Driver2"
+    ],
+    [
+      "21fa9dcd-8d7e-43e6-ad41-a563f85411a1",
+      "Driver3"
     ]
   ],
   "text_variables": {}
