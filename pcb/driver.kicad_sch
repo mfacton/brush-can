@@ -1770,6 +1770,28 @@
 		)
 		(uuid "eee270d7-c8ec-43b1-bd6f-c5ed8db611aa")
 	)
+	(label "OUT1"
+		(at 110.49 68.58 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1dadd788-b040-4054-94f8-741f6adb8628")
+	)
+	(label "OUT2"
+		(at 110.49 71.12 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "40d46831-b708-4570-9779-960e05849b10")
+	)
 	(hierarchical_label "SLP"
 		(shape input)
 		(at 81.28 63.5 180)
@@ -3431,6 +3453,15 @@
 			)
 		)
 		(property "Description" "Generic connectable mounting pin connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 121.92 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C160405"
 			(at 121.92 73.66 0)
 			(effects
 				(font
