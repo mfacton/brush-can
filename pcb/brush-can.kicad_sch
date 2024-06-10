@@ -7103,6 +7103,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C160402"
+			(at 269.24 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c0f5ee48-11d8-42e0-8f47-d54731aa17db")
 		)
@@ -7398,7 +7407,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "17ab61ce-785c-466e-bb3d-7d1d84e9813e")
 		(property "Reference" "M2"
@@ -8838,7 +8847,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "52k3"
+		(property "Value" "56k"
 			(at 256.54 78.7399 0)
 			(effects
 				(font
@@ -9912,6 +9921,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C160402"
+			(at 251.46 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5fc99fed-6a8d-4c37-80d1-c485f53a621e")
 		)
@@ -10255,6 +10273,15 @@
 			)
 		)
 		(property "Description" "STMicroelectronics Arm Cortex-M4 MCU, 128KB flash, 32KB RAM, 170 MHz, 1.71-3.6V, 42 GPIO, UFQFPN48"
+			(at 111.76 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C529356"
 			(at 111.76 129.54 0)
 			(effects
 				(font
@@ -10917,7 +10944,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "bca848e8-ab0d-43fd-889c-55ea51809b6b")
 		(property "Reference" "J8"
@@ -11271,7 +11298,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "c742b081-8282-4cbf-80a6-adb6b6b806fc")
 		(property "Reference" "J7"
@@ -11498,7 +11525,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "dee64693-3b2e-4277-ae58-2ea1c9172d39")
 		(property "Reference" "M1"
