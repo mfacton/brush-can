@@ -59,6 +59,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ECA1_Pin GPIO_PIN_0
+#define ECA1_GPIO_Port GPIOB
+#define ECB1_Pin GPIO_PIN_2
+#define ECB1_GPIO_Port GPIOB
+#define ECA3_Pin GPIO_PIN_4
+#define ECA3_GPIO_Port GPIOB
+#define ECB3_Pin GPIO_PIN_5
+#define ECB3_GPIO_Port GPIOB
+#define ECA2_Pin GPIO_PIN_6
+#define ECA2_GPIO_Port GPIOB
+#define ECB2_Pin GPIO_PIN_9
+#define ECB2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
