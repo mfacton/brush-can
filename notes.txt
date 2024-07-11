@@ -1,3 +1,4 @@
 maybe not solder power pins because they stick out the back(also not short)
 also put the programmer on top to not short
 don't use small or plugged vias
+add enable signal
