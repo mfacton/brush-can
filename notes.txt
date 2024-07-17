@@ -3,3 +3,11 @@ also put the programmer on top to not short
 don't use small or plugged vias
 add enable signal
 remove reset and boot extras
+
+pwm frequency for ina, inb, current limiter 50khz
+
+based on simulation takes about 20ms to do 1.5V swing of current limit input
+
+current limit(A) = Vref * (1000/2200Ω) or Vref * 0.454545
+limit(A) = Duty% * 3/200
+limit(A) = Duty(1-100) * 0.015
