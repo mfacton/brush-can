@@ -11,6 +11,16 @@ static struct MotorConfig motors[MOTOR_COUNT] = {{.aTimer = &htim3, .aChannel = 
 		{.aTimer = &htim15, .aChannel = TIM_CHANNEL_2, .bTimer = &htim8, .bChannel = TIM_CHANNEL_1, .currentTimer = &htim1, .currentChannel = TIM_CHANNEL_1},
 		{.aTimer = &htim1, .aChannel = TIM_CHANNEL_3, .bTimer = &htim1, .bChannel = TIM_CHANNEL_2, .currentTimer = &htim2, .currentChannel = TIM_CHANNEL_1}};
 
+static int8_t motor_clamp(int8_t val) {
+	if (val < 0) {
+		return 0;
+	}
+	if (val > 100) {
+		return 100;
+	}
+	return val;
+}
+
 void Motor_Init(void) {
 	for (int m = 0; m < MOTOR_COUNT; m++) {
 		HAL_TIM_PWM_Start(motors[m].aTimer, motors[m].aChannel);
@@ -23,7 +33,7 @@ void Motor_Current(enum Motor motor, uint8_t current) {
 	__HAL_TIM_SET_COMPARE(motors[motor].currentTimer, motors[motor].currentChannel, current);
 }
 
-void Motor_Duty(enum Motor motor, uint8_t aDuty, uint8_t bDuty) {
-	__HAL_TIM_SET_COMPARE(motors[motor].aTimer, motors[motor].aChannel, aDuty);
-	__HAL_TIM_SET_COMPARE(motors[motor].bTimer, motors[motor].bChannel, bDuty);
+void Motor_Voltage(enum Motor motor, int8_t voltage) {
+	__HAL_TIM_SET_COMPARE(motors[motor].aTimer, motors[motor].aChannel, motor_clamp(voltage));
+	__HAL_TIM_SET_COMPARE(motors[motor].bTimer, motors[motor].bChannel, motor_clamp(-voltage));
 }

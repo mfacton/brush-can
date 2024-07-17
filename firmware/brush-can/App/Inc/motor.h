@@ -23,9 +23,9 @@ enum Motor {
 
 void Motor_Init(void);
 
-//0-100 = 0-6.5
+//0-100
 void Motor_Current(enum Motor motor, uint8_t current);
 
-void Motor_Duty(enum Motor motor, uint8_t aDuty, uint8_t bDuty);
+void Motor_Voltage(enum Motor motor, int8_t voltage);
 
 #endif

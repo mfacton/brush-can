@@ -4,7 +4,6 @@
 #include <motor.h>
 #include "inttypes.h"
 
-
 #define ENCODER_COUNT 3
 
 struct EncoderConfig {

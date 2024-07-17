@@ -1,3 +1,4 @@
+#include "command.h"
 #include "can.h"
 #include "inttypes.h"
 #include "main.h"
@@ -12,10 +13,7 @@ static uint8_t rx_data[64];
 //		24, 32, 48, 64 };
 
 static inline void can_handle_message(void) {
-	//		uint16_t *head_pos = (uint16_t*) rx_data;
-	//		*head_pos = (uint16_t) rx_header.Identifier;
-	//		rx_data[1] |= rx_header.DataLength << 11;
-	//		CDC_Transmit_FS(rx_data, 2 + dlc_size(rx_header.DataLength));
+	Command_Instruction(rx_header.Identifier, rx_data);
 }
 
 static inline void can_receive(void) {

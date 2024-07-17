@@ -10,7 +10,7 @@ static struct EncoderConfig encoders[ENCODER_COUNT] = {{.aPort = ECA1_GPIO_Port,
 
 static uint8_t aLast[ENCODER_COUNT] = {0};
 static uint8_t bLast[ENCODER_COUNT] = {0};
-static int32_t position[ENCODER_COUNT] = {0};
+static volatile int32_t position[ENCODER_COUNT] = {0};
 
 void Encoder_Init(void) {
 	HAL_TIM_Base_Start_IT(&htim17);
@@ -24,8 +24,9 @@ void Encoder_Handler(void) {
 		const uint8_t aDiff = aState^aLast[e];
 		const uint8_t bDiff = bState^bLast[e];
 		if (aDiff^bDiff) {
-			const uint8_t dir = aDiff^aState;
-			position[e] += (dir<<2) - 1;
+			const uint8_t dir = aDiff ^ aState ^ bState;
+			position[e] += (dir<<1);
+			position[e] -= 1;
 		}
 		aLast[e] = aState;
 		bLast[e] = bState;
