@@ -10,13 +10,23 @@
 //Auto-generate parse functions
 COMMAND_PARSE(uint8_t)
 COMMAND_PARSE(int8_t)
-//COMMAND_FUNC(uint16_t)
-//COMMAND_FUNC(int16_t)
-//COMMAND_FUNC(uint32_t)
+COMMAND_PARSE(uint16_t)
+//COMMAND_PARSE(int16_t)
+//COMMAND_PARSE(uint32_t)
 COMMAND_PARSE(int32_t)
 COMMAND_PARSE(float)
 
+static uint16_t address_offset = 0;
+
+static void command_address(uint16_t offset) {
+	address_offset = offset;
+}
+
 void Command_Instruction(uint8_t id, uint8_t *data) {
+	if (id < address_offset) {
+		return;
+	}
+	id -= address_offset;
 	const uint8_t chan = data[0];
 	uint8_t msg[4];
 	switch (id) {
@@ -36,6 +46,9 @@ void Command_Instruction(uint8_t id, uint8_t *data) {
 		COMMAND_GET(Position, Encoder_Position, int32_t)
 		COMMAND_GET(Current, Adc_Value, int16_t)
 
+	case CommandSetAddress:
+		command_address(command_uint16_t(data, 0));
+		break;
 	case CommandReset:
 		Control_Reset(chan);
 		break;

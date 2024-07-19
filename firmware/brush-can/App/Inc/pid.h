@@ -11,7 +11,7 @@ enum Pid {
 	Pid3,
 };
 
-float Pid_Update(enum Pid pid, int32_t pos);
+float Pid_Update(enum Pid pid, int32_t pos, float dt);
 
 void Pid_Reset(enum Pid pid, int32_t pos);
 

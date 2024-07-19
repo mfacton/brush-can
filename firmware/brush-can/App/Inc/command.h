@@ -4,7 +4,7 @@
 #include "inttypes.h"
 
 #define COMMAND_PARSE(type)							\
-static type control_##type(uint8_t* d, uint8_t i) {	\
+static type command_##type(uint8_t* d, uint8_t i) {	\
     type v;											\
     memcpy(&v, d + i, sizeof(type));				\
     return v;										\
@@ -12,7 +12,7 @@ static type control_##type(uint8_t* d, uint8_t i) {	\
 
 #define COMMAND_SET(id, func, type)         \
 case CommandSet##id:						\
-		func(chan, control_##type(data, 1));\
+		func(chan, command_##type(data, 1));\
 		break;								\
 
 #define COMMAND_CAN_SIZE(size) (size==1?CanSize1:size==2?CanSize2:CanSize4)
@@ -37,6 +37,7 @@ enum Command {
 	CommandSetCurrent, //uint8_t
 	CommandSetTarget, //int32
 	CommandSetMode, //uint8_t
+	CommandSetAddress,//uint16_t
 	CommandReset, //none
 
 	//request commands

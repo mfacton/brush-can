@@ -15,12 +15,14 @@ void App_Init(void) {
 	Encoder_Init();
 	Can_Init();
 	Control_Init();
+
+	HAL_Delay(1);
 }
 
 void App_Loop(void) {
 	Control_Update();
 
-	HAL_Delay(10);
+	HAL_Delay(2);
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {

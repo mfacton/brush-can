@@ -1,8 +1,6 @@
 #include "pid.h"
 #include "main.h"
 
-extern TIM_HandleTypeDef htim16;
-
 //PID constants
 static float kp[PID_COUNT] = {0};
 static float ki[PID_COUNT] = {0};
@@ -31,20 +29,19 @@ static float pid_reg(float a, float b) {
 	return a;
 }
 
-float Pid_Update(enum Pid pid, int32_t pos) {
+float Pid_Update(enum Pid pid, int32_t pos, float delta) {
 	const int32_t err = target[pid] - pos;
-	const float delta = (float)__HAL_TIM_GET_COUNTER(&htim16)/((float)1e6);
 
 	const float p = pid_reg(kp[pid]*(float)err, mp[pid]);
 
 	err_int[pid] += (float)err*delta;
 	const float i = pid_reg(ki[pid]*(float)err_int[pid], mi[pid]);
-	err_int[pid] = i/ki[pid];
+	if (ki[pid] != 0) {
+		err_int[pid] = i/ki[pid];
+	}
 
 	const float d = pid_reg(kd[pid]*(float)(err - err_prev[pid])/(float)delta, md[pid]);
 	err_prev[pid] = err;
-
-	__HAL_TIM_SET_COUNTER(&htim16, 0);
 
 	return pid_reg(p+i+d, mo[pid]);
 }
