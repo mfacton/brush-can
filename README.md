@@ -1,2 +1,2 @@
 # brush-can
-Dense quad brushed motor controller with CAN
+Dense triple brushed motor controller with CAN FD
