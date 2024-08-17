@@ -4,6 +4,8 @@
 #include "inttypes.h"
 
 #define ADC_COUNT 4
+#define ADC_MAX_CHANNELS 3
+#define ADC_PERIPHERAL_COUNT 2
 
 enum Adc {
 	Adc1,
