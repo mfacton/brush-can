@@ -1290,6 +1290,16 @@
 		(color 0 0 0 0)
 		(uuid "a41eb8ad-cc55-4aff-9b08-35443cae37c7")
 	)
+	(junction
+		(at 81.28 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c402a3e4-f050-44d0-8f48-fd70349252a2")
+	)
+	(no_connect
+		(at 83.82 60.96)
+		(uuid "bcd75da1-0661-49d4-aa98-d9b12f33a45f")
+	)
 	(wire
 		(pts
 			(xy 139.7 63.5) (xy 139.7 60.96)
@@ -1309,6 +1319,16 @@
 			(type default)
 		)
 		(uuid "07c41de4-9756-46fd-994e-5b195d8e2170")
+	)
+	(wire
+		(pts
+			(xy 81.28 55.88) (xy 81.28 63.5)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "088003f3-5fc3-44e5-8b92-6a49c2f46f91")
 	)
 	(wire
 		(pts
@@ -1692,16 +1712,6 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 60.96) (xy 83.82 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c07b5a55-1de5-4793-9780-c10788648d8c")
-	)
-	(wire
-		(pts
 			(xy 93.98 76.2) (xy 93.98 78.74)
 		)
 		(stroke
@@ -1782,18 +1792,6 @@
 		)
 		(uuid "40d46831-b708-4570-9779-960e05849b10")
 	)
-	(hierarchical_label "SLP"
-		(shape input)
-		(at 81.28 63.5 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "26f450a3-cc6c-410d-a951-6e83a3befc22")
-	)
 	(hierarchical_label "IPR"
 		(shape output)
 		(at 132.08 63.5 0)
@@ -1841,18 +1839,6 @@
 			(justify right)
 		)
 		(uuid "c42a9ca9-8fa6-4bfa-b2b4-e13b96fa65ee")
-	)
-	(hierarchical_label "FLT"
-		(shape output)
-		(at 81.28 60.96 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d81cf34e-f432-4bdb-81b7-3cb39b958a79")
 	)
 	(hierarchical_label "PLM"
 		(shape input)
@@ -2011,6 +1997,15 @@
 		)
 		(property "Description" "Resistor"
 			(at 146.05 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25123"
+			(at 146.05 60.96 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2376,6 +2371,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C25879"
+			(at 129.54 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1d7efc95-7eb1-48c6-9867-e125a199c1c4")
 		)
@@ -2518,6 +2522,15 @@
 		)
 		(property "Description" "Unpolarized capacitor"
 			(at 113.03 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1532"
+			(at 113.03 55.88 90)
 			(effects
 				(font
 					(size 1.27 1.27)
