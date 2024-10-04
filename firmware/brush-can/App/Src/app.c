@@ -8,7 +8,6 @@
 #include "control.h"
 
 extern TIM_HandleTypeDef htim17;
-extern TIM_HandleTypeDef htim7;
 
 void App_Init(void) {
 	Motor_Init();
@@ -29,8 +28,6 @@ void App_Loop(void) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	if (htim == &htim17) {
 		Encoder_Handler();
-	}else if (htim == &htim7) {
-		Adc_Handler();
 	}
 }
 
