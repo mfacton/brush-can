@@ -1,11 +1,10 @@
 #include <motor.h>
 #include "main.h"
 
-extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim4;
 extern TIM_HandleTypeDef htim8;
-extern TIM_HandleTypeDef htim15;
 
 static struct MotorConfig motors[MOTOR_COUNT] = {{.aTimer = &htim3, .aChannel = TIM_CHANNEL_2, .bTimer = &htim15, .bChannel = TIM_CHANNEL_1, .currentTimer = &htim3, .currentChannel = TIM_CHANNEL_4},
 		{.aTimer = &htim15, .aChannel = TIM_CHANNEL_2, .bTimer = &htim8, .bChannel = TIM_CHANNEL_1, .currentTimer = &htim1, .currentChannel = TIM_CHANNEL_1},

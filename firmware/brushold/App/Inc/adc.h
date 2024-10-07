@@ -6,10 +6,10 @@
 #define ADC_COUNT 4
 
 enum Adc {
-	Adc1,
-	Adc2,
-	Adc3,
 	AdcTemp,
+	Adc3,
+	Adc2,
+	Adc1,
 };
 
 void Adc_Init(void);

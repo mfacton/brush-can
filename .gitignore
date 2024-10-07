@@ -6,9 +6,11 @@ backups/
 fp-info-cache
 *auto_saved_files*
 
-### STM32 ###
-.metadata/
+### STM32 CMake ###
+RelWithDebInfo/
+MinSizeRel/
 Debug/
-Drivers/
-Middlewares/
+Release/
 USB_DEVICE/
+USB_Device/
+
