@@ -37,7 +37,7 @@ static uint16_t adc1Data[2] = {0};
 static uint16_t adc2Data[2] = {0};
 // static uint16_t* adcs[3] = {adc1Data, adc1Data+1, adc2Data};
 
-static const uint16_t startId = 69;
+static const uint16_t startId = 128;
 static FDCAN_TxHeaderTypeDef txHeader = {
 	.IdType = FDCAN_STANDARD_ID,
 	.TxFrameType = FDCAN_DATA_FRAME,

@@ -20,7 +20,6 @@ class BrushCan:
     def handle(self, frame):
         self.position = struct.unpack("=i", frame.data)[0]
         self.request_fulfilled = True
-        print(frame)
 
     def request_position(self):
         get_router().send(can.Message(
@@ -37,3 +36,18 @@ class BrushCan:
             is_remote_frame=False,
             data=struct.pack("=Bf", command, value),
         ))
+
+    def set_current_limit(self, value):
+        self.send_command(0, value)
+
+    def set_target(self, value):
+        self.send_command(1, value)
+
+    def set_P(self, value):
+        self.send_command(2, value)
+
+    def set_I(self, value):
+        self.send_command(3, value)
+
+    def set_D(self, value):
+        self.send_command(4, value)

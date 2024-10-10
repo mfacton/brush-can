@@ -12,16 +12,18 @@ init_router(can.Bus, params, configure_logging())
 # tm = create_device(node_id=...)
 
 # example begins here
-brush1 = BrushCan(69)
-brush2 = BrushCan(70)
-brush3 = BrushCan(71)
+brush1 = BrushCan(128)
+brush2 = BrushCan(129)
+brush3 = BrushCan(130)
 
-brush1.send_command(0, 20)
-brush1.send_command(2, 0.1)
+# current is 0-100 and 40 seems like plenty
+brush2.set_current_limit(40)
+brush2.set_P(0.1)
 
-brush1.send_command(1, 10000)
+# in encoder ticks
+brush2.set_target(10000)
 
 while True:
-    brush1.request_position()
+    brush2.request_position()
     time.sleep(0.1)
-    print(brush1.position)
+    print(brush2.position)
