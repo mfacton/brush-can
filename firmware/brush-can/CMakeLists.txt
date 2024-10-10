@@ -42,6 +42,8 @@ add_subdirectory(cmake/stm32cubemx)
 
 set(LIB_COMPS
     ENCODER
+    DRV8876
+    PID
 )
 
 add_subdirectory(/home/mfact/Projects/stm-lib "${CMAKE_CURRENT_BINARY_DIR}/stm-lib")
@@ -75,3 +77,8 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     stm_lib
     # Add user defined libraries
 )
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND arm-none-eabi-objcopy -O binary ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.elf ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.bin
+)
+

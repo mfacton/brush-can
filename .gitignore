@@ -14,3 +14,6 @@ Release/
 USB_DEVICE/
 USB_Device/
 
+### VS Code ###
+.vscode/
+
