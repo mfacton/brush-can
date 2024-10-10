@@ -21,6 +21,7 @@ extern FDCAN_HandleTypeDef hfdcan1;
 static struct Encoder_Handle encoder1 = {.aPort = ECA1_GPIO_Port, .aPin = ECA1_Pin, .bPort = ECB1_GPIO_Port, .bPin = ECB1_Pin};
 static struct Encoder_Handle encoder2 = {.aPort = ECA2_GPIO_Port, .aPin = ECA2_Pin, .bPort = ECB2_GPIO_Port, .bPin = ECB2_Pin};
 static struct Encoder_Handle encoder3 = {.aPort = ECA3_GPIO_Port, .aPin = ECA3_Pin, .bPort = ECB3_GPIO_Port, .bPin = ECB3_Pin};
+static struct Encoder_Handle* encoders[3] = {&encoder1, &encoder2, &encoder3};
 
 static struct Drv8876_Handle m1 = {.aTim = &htim2, .aChan = TIM_CHANNEL_4, .bTim = &htim2, .bChan = TIM_CHANNEL_3, .cTim = &htim2, .cChan = TIM_CHANNEL_1, .max = 100};
 static struct Drv8876_Handle m2 = {.aTim = &htim4, .aChan = TIM_CHANNEL_2, .bTim = &htim4, .bChan = TIM_CHANNEL_1, .cTim = &htim3, .cChan = TIM_CHANNEL_2, .max = 100};
@@ -34,7 +35,7 @@ static struct Pid_Handle* pids[3] = {&pid1, &pid2, &pid3};
 
 static uint16_t adc1Data[2] = {0};
 static uint16_t adc2Data[2] = {0};
-static uint16_t* adcs[3] = {adc1Data, adc1Data+1, adc2Data};
+// static uint16_t* adcs[3] = {adc1Data, adc1Data+1, adc2Data};
 
 static const uint16_t startId = 69;
 static FDCAN_TxHeaderTypeDef txHeader = {
@@ -64,8 +65,11 @@ static void app_parse_frame(void) {
 	if (rxHeader.RxFrameType == FDCAN_REMOTE_FRAME) {
 		// request current
 		txHeader.Identifier = frameId;
-		txHeader.DataLength = 2;
-		HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)adcs[motor]);
+		txHeader.DataLength = FDCAN_DLC_BYTES_4;
+		HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)&(encoders[motor]->pos));
+
+		// txHeader.DataLength = FDCAN_DLC_BYTES_2;
+		// HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)(adc2Data+1));
 	}else{
 		float val;
 		memcpy((uint8_t*)&val, rxData+1, 4);
