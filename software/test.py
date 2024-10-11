@@ -1,9 +1,10 @@
 import time
 
 import can
-from brush_can import BrushCan
 from tinymovr.bus_router import init_router
 from tinymovr.config import configure_logging, create_device, get_bus_config
+
+from brush_can import BrushCan
 
 # don't init if you already have in another program
 params = get_bus_config(["canine", "slcan_disco"], bitrate=1000000)
@@ -17,13 +18,15 @@ brush2 = BrushCan(129)
 brush3 = BrushCan(130)
 
 # current is 0-100 and 40 seems like plenty
-brush2.set_current_limit(40)
-brush2.set_P(0.1)
+brush1.set_current_limit(40)
+brush1.set_P(0.1)
+brush1.set_direction(0)
+brush1.set_position(0)
 
 # in encoder ticks
-brush2.set_target(10000)
+brush1.set_target(10000)
 
 while True:
-    brush2.request_position()
+    brush1.request_position()
     time.sleep(0.1)
-    print(brush2.position)
+    print(brush1.position)

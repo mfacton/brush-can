@@ -51,3 +51,9 @@ class BrushCan:
 
     def set_D(self, value):
         self.send_command(4, value)
+
+    def set_position(self, value):
+        self.send_command(5, value)
+
+    def set_direction(self, value):
+        self.send_command(6, value)

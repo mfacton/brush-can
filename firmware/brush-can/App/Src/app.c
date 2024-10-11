@@ -18,14 +18,14 @@ extern FDCAN_HandleTypeDef hfdcan1;
 
 // 8000 steps per second at full speed
 // 20khz is good
-static struct Encoder_Handle encoder1 = {.aPort = ECA1_GPIO_Port, .aPin = ECA1_Pin, .bPort = ECB1_GPIO_Port, .bPin = ECB1_Pin};
-static struct Encoder_Handle encoder2 = {.aPort = ECA2_GPIO_Port, .aPin = ECA2_Pin, .bPort = ECB2_GPIO_Port, .bPin = ECB2_Pin};
-static struct Encoder_Handle encoder3 = {.aPort = ECA3_GPIO_Port, .aPin = ECA3_Pin, .bPort = ECB3_GPIO_Port, .bPin = ECB3_Pin};
+static struct Encoder_Handle encoder1 = {.aPort = ECA1_GPIO_Port, .aPin = ECA1_Pin, .bPort = ECB1_GPIO_Port, .bPin = ECB1_Pin, .dir = 1};
+static struct Encoder_Handle encoder2 = {.aPort = ECA2_GPIO_Port, .aPin = ECA2_Pin, .bPort = ECB2_GPIO_Port, .bPin = ECB2_Pin, .dir = 1};
+static struct Encoder_Handle encoder3 = {.aPort = ECA3_GPIO_Port, .aPin = ECA3_Pin, .bPort = ECB3_GPIO_Port, .bPin = ECB3_Pin, .dir = 1};
 static struct Encoder_Handle* encoders[3] = {&encoder1, &encoder2, &encoder3};
 
-static struct Drv8876_Handle m1 = {.aTim = &htim2, .aChan = TIM_CHANNEL_4, .bTim = &htim2, .bChan = TIM_CHANNEL_3, .cTim = &htim2, .cChan = TIM_CHANNEL_1, .max = 100};
-static struct Drv8876_Handle m2 = {.aTim = &htim4, .aChan = TIM_CHANNEL_2, .bTim = &htim4, .bChan = TIM_CHANNEL_1, .cTim = &htim3, .cChan = TIM_CHANNEL_2, .max = 100};
-static struct Drv8876_Handle m3 = {.aTim = &htim3, .aChan = TIM_CHANNEL_1, .bTim = &htim2, .bChan = TIM_CHANNEL_2, .cTim = &htim8, .cChan = TIM_CHANNEL_1, .max = 100};
+static struct Drv8876_Handle m1 = {.aTim = &htim2, .aChan = TIM_CHANNEL_4, .bTim = &htim2, .bChan = TIM_CHANNEL_3, .cTim = &htim2, .cChan = TIM_CHANNEL_1, .max = 100, .dir = 1};
+static struct Drv8876_Handle m2 = {.aTim = &htim4, .aChan = TIM_CHANNEL_2, .bTim = &htim4, .bChan = TIM_CHANNEL_1, .cTim = &htim3, .cChan = TIM_CHANNEL_2, .max = 100, .dir = 1};
+static struct Drv8876_Handle m3 = {.aTim = &htim3, .aChan = TIM_CHANNEL_1, .bTim = &htim2, .bChan = TIM_CHANNEL_2, .cTim = &htim8, .cChan = TIM_CHANNEL_1, .max = 100, .dir = 1};
 static struct Drv8876_Handle* motors[3] = {&m1, &m2, &m3};
 
 static struct Pid_Handle pid1 = {.kp = 0, .ki = 0, .kd = 0};
@@ -37,7 +37,7 @@ static uint16_t adc1Data[2] = {0};
 static uint16_t adc2Data[2] = {0};
 // static uint16_t* adcs[3] = {adc1Data, adc1Data+1, adc2Data};
 
-static const uint16_t startId = 128;
+static const uint16_t startId = 256;
 static FDCAN_TxHeaderTypeDef txHeader = {
 	.IdType = FDCAN_STANDARD_ID,
 	.TxFrameType = FDCAN_DATA_FRAME,
@@ -89,6 +89,14 @@ static void app_parse_frame(void) {
 			break;
 		case 4: // D
 			pids[motor]->kd = val;
+			break;
+		case 5:
+			encoders[motor]->pos = val;
+			break;
+		case 6:
+			motors[motor]->dir = val>0;
+			encoders[motor]->dir = val>0;
+			encoders[motor]->pos = -encoders[motor]->pos;
 			break;
 		}
 	}
