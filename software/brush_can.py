@@ -39,6 +39,9 @@ class BrushCan:
 
     def set_current_limit(self, value):
         self.send_command(0, value)
+    
+    def disable(self):
+        self.send_command(0, 0)
 
     def set_target(self, value):
         self.send_command(1, value)

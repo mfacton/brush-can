@@ -27,6 +27,7 @@ brush1.set_position(0)
 brush1.set_target(10000)
 
 while True:
-    brush1.request_position()
-    time.sleep(0.1)
+    brush1.set_target(10000)
+    time.sleep(0.001)
+    #brush1.request_position()
     print(brush1.position)

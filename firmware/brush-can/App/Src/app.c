@@ -37,7 +37,7 @@ static uint16_t adc1Data[2] = {0};
 static uint16_t adc2Data[2] = {0};
 // static uint16_t* adcs[3] = {adc1Data, adc1Data+1, adc2Data};
 
-static const uint16_t startId = 256;
+static const uint16_t startId = 128;
 static FDCAN_TxHeaderTypeDef txHeader = {
 	.IdType = FDCAN_STANDARD_ID,
 	.TxFrameType = FDCAN_DATA_FRAME,
@@ -59,14 +59,18 @@ static FDCAN_FilterTypeDef filter = {
 	.FilterID2 = startId+2,
 };
 
+static void send_position(uint16_t id, int32_t pos) {
+    txHeader.Identifier = id;
+	txHeader.DataLength = FDCAN_DLC_BYTES_4;
+	HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)&pos);
+}
+
 static void app_parse_frame(void) {
 	const uint16_t frameId = rxHeader.Identifier;
 	const uint16_t motor = frameId-startId;
 	if (rxHeader.RxFrameType == FDCAN_REMOTE_FRAME) {
 		// request current
-		txHeader.Identifier = frameId;
-		txHeader.DataLength = FDCAN_DLC_BYTES_4;
-		HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)&(encoders[motor]->pos));
+		send_position(frameId, encoders[motor]->pos);
 
 		// txHeader.DataLength = FDCAN_DLC_BYTES_2;
 		// HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &txHeader, (uint8_t*)(adc2Data+1));
@@ -80,6 +84,7 @@ static void app_parse_frame(void) {
 			break;
 		case 1: // target
 			pids[motor]->target = val;
+		    send_position(frameId, encoders[motor]->pos);
 			break;
 		case 2: // P
 			pids[motor]->kp = val;
@@ -121,6 +126,8 @@ void App_Init(void) {
 	HAL_FDCAN_ConfigGlobalFilter(&hfdcan1, FDCAN_REJECT, FDCAN_REJECT, FDCAN_FILTER_REMOTE, FDCAN_REJECT_REMOTE);
 	HAL_FDCAN_ConfigFilter(&hfdcan1, &filter);
 
+    
+
     HAL_FDCAN_Start(&hfdcan1);
 	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_FIFO0_NEW_MESSAGE, 0);
 
@@ -130,6 +137,7 @@ void App_Init(void) {
 
 void App_Update(void) {
 	// do nothing
+	
 }
 
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs) {
